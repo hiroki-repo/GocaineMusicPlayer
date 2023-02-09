@@ -23,10 +23,41 @@ albumaddx2=0
 albumlisterex2=""
 albumlisterex2_2=""
 dim albumlisterex2_3,1
+dim albumlisterex2_4,1
 notesel albumlisterex
 noteget selectedalbumname,selectedalbum 
 repeat musixmax
-if (selectedalbumname=mp3ils(8,cnt)){albumlisterex2+=mp3ils(1,cnt)+"\n":albumlisterex2_2+=mp3ils(0,cnt)+"\n":albumlisterex2_3(albumaddx2)=cnt:albumaddx2++}
+if (selectedalbumname=mp3ils(8,cnt)){albumlisterex2+=mp3ils(1,cnt)+"\n":albumlisterex2_2+=mp3ils(0,cnt)+"\n":albumlisterex2_3(albumaddx2)=cnt:albumlisterex2_4(albumaddx2)=int(mp3ils(6,cnt)):albumaddx2++}
+loop
+albumlisterex2tmp=""
+albumlisterex2_2tmp=""
+dim albumlisterex2_3tmp,1
+dim albumlisterex2_4tmp,1
+albumaddx24xxx=0
+repeat
+cnt2=cnt
+repeat albumaddx2
+if albumlisterex2_4(cnt)=cnt2{
+notesel albumlisterex2
+noteget albumlisterex2slc,cnt
+noteunsel
+notesel albumlisterex2_2
+noteget albumlisterex2_2slc,cnt
+noteunsel
+albumlisterex2tmp+=albumlisterex2slc+"\n"
+albumlisterex2_2tmp+=albumlisterex2_2slc+"\n"
+albumlisterex2_3tmp(cnt)=albumlisterex2_3(cnt)
+albumlisterex2_4tmp(cnt)=albumlisterex2_4(cnt)
+albumaddx24xxx++
+}
+loop
+if albumaddx24xxx>=albumaddx2{break}
+loop
+albumlisterex2=albumlisterex2tmp
+albumlisterex2_2=albumlisterex2_2tmp
+repeat albumaddx2
+albumlisterex2_3(cnt)=albumlisterex2_3tmp(cnt)
+albumlisterex2_4(cnt)=albumlisterex2_4tmp(cnt)
 loop
 return
 
