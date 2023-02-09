@@ -1,0 +1,39 @@
+#include "gettitle.as"
+sdim mp3info,4096,256,2
+//GetID3Array "C:\\Users\\hiroki_repo\\Music\\N01. ‰¬ñ≤ëz.mp3",mp3info
+GetTagArray "C:\\Users\\hiroki_repo\\Music\\N01. ‰¬ñ≤ëz.mp3",mp3info
+mes GetTitleName(mp3info)
+mes GetArtistName(mp3info)
+mes GetPublisherName(mp3info)
+mes GetReleasedDate(mp3info)
+mes GetReleasedYear(mp3info)
+mes GetTrackNumber(mp3info)
+mes GetISRC(mp3info)
+mes GetAlbumName(mp3info)
+mes GetAlbumArtistName(mp3info)
+
+sdim mp3info2,4096,256,2
+//GetID3Array "C:\\Users\\hiroki_repo\\Music\\ZUN - ëfìGÇ»ïÊèÍÇ≈ïÈÇµÇ‹ÇµÇÂ.mp3",mp3info2
+GetTagArray "C:\\Users\\hiroki_repo\\Music\\ZUN - ëfìGÇ»ïÊèÍÇ≈ïÈÇµÇ‹ÇµÇÂ.mp3",mp3info2
+mes GetTitleName(mp3info2)
+mes GetArtistName(mp3info2)
+mes GetPublisherName(mp3info2)
+mes GetReleasedDate(mp3info2)
+mes GetReleasedYear(mp3info2)
+mes GetTrackNumber(mp3info2)
+mes GetISRC(mp3info2)
+mes GetAlbumName(mp3info2)
+mes GetAlbumArtistName(mp3info2)
+
+sdim flacinfo,4096,256,2
+//GetFLACArray "C:\\Users\\hiroki_repo\\Music\\(02) [ÇŒÇÒÇµ] Ç©Ç›Ç≥Ç‹ÇÃå‰êS.flac",flacinfo
+GetTagArray "C:\\Users\\hiroki_repo\\Music\\(02) [ÇŒÇÒÇµ] Ç©Ç›Ç≥Ç‹ÇÃå‰êS.flac",flacinfo
+mes GetTitleName(flacinfo)
+mes GetArtistName(flacinfo)
+mes GetPublisherName(flacinfo)
+mes GetReleasedDate(flacinfo)
+mes GetReleasedYear(flacinfo)
+mes GetTrackNumber(flacinfo)
+mes GetISRC(flacinfo)
+mes GetAlbumName(flacinfo)
+mes GetAlbumArtistName(flacinfo)

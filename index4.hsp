@@ -1,0 +1,10 @@
+notesel musiclist4load
+noteload "musicdb.txt"
+noteget howmanylisttabsstr,0
+sdim mp3ils,256,int(howmanylisttabsstr),(int(notemax)-1)/int(howmanylisttabsstr)
+repeat ((int(notemax)-1)/int(howmanylisttabsstr))
+cnt2=cnt
+repeat int(howmanylisttabsstr)
+noteget mp3ils(cnt,cnt2),((int(howmanylisttabsstr)*cnt2)+cnt)+1
+loop
+loop

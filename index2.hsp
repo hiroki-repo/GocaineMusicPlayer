@@ -1,0 +1,26 @@
+#include "hsp3cl.as"
+#include "gettitle.as"
+#packopt name "getmusiclist"
+path=dirinfo($1000d)+"\\"
+notesel filelist
+dirlist filelist,path+"*.*",1
+repeat notemax
+noteget filenamex,cnt
+sdim mp3info,4096,256,2
+//GetID3Array "C:\\Users\\hiroki_repo\\Music\\N01. äÂ–²‘z.mp3",mp3info
+GetTagArray path+filenamex,mp3info
+mes path+filenamex
+mes "Title     :"+GetTitleName(mp3info)
+mes "Artist    :"+GetArtistName(mp3info)
+mes "Publisher :"+GetPublisherName(mp3info)
+mes "Date      :"+GetReleasedDate(mp3info)
+mes "Year      :"+GetReleasedYear(mp3info)
+mes "Track ID  :"+GetTrackNumber(mp3info)
+mes "ISRC      :"+GetISRC(mp3info)
+mes "Album     :"+GetAlbumName(mp3info)
+mes "Disc No   :"+GetDiscNumber(mp3info)
+mes "Created by:"+GetAlbumArtistName(mp3info)
+mes "--- End File Info ---"
+await
+loop
+end

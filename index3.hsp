@@ -1,0 +1,36 @@
+#include "gettitle.as"
+path=dirinfo($1000d)+"\\"
+notesel filelist
+dirlist filelist,path+"*.*",1
+sdim mp3ils,256,32,256
+unknownedname(0)="Unknown File","Unknown Title","Unknown Artist","Unknown Publisher","-","-","-","-","Unknown Album","-","Unknown Artist"
+repeat notemax
+noteget filenamex,cnt
+sdim mp3info,4096,256,2
+//GetID3Array "C:\\Users\\hiroki_repo\\Music\\N01. äÂ–²‘z.mp3",mp3info
+GetTagArray path+filenamex,mp3info
+mp3ils(0,cnt)=path+filenamex
+mp3ils(1,cnt)=GetTitleName(mp3info)
+mp3ils(2,cnt)=GetArtistName(mp3info)
+mp3ils(3,cnt)=GetPublisherName(mp3info)
+mp3ils(4,cnt)=GetReleasedDate(mp3info)
+mp3ils(5,cnt)=GetReleasedYear(mp3info)
+mp3ils(6,cnt)=GetTrackNumber(mp3info)
+mp3ils(7,cnt)=GetISRC(mp3info)
+mp3ils(8,cnt)=GetAlbumName(mp3info)
+mp3ils(9,cnt)=GetDiscNumber(mp3info)
+mp3ils(10,cnt)=GetAlbumArtistName(mp3info)
+musixmax=cnt+1
+loop
+repeat musixmax
+cnt2=cnt
+repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
+loop
+notesel musiclist4save
+noteadd str(length(mp3ils)),-1,0
+repeat musixmax
+cnt2=cnt
+repeat length(mp3ils):noteadd mp3ils(cnt,cnt2),-1,0:loop
+loop
+notesave "musicdb.txt"
+end
