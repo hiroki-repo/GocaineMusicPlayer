@@ -46,8 +46,8 @@ noteget albumlisterex2_2slc,cnt
 noteunsel
 albumlisterex2tmp+=albumlisterex2slc+"\n"
 albumlisterex2_2tmp+=albumlisterex2_2slc+"\n"
-albumlisterex2_3tmp(cnt)=albumlisterex2_3(cnt)
-albumlisterex2_4tmp(cnt)=albumlisterex2_4(cnt)
+albumlisterex2_3tmp(albumaddx24xxx)=albumlisterex2_3(cnt)
+albumlisterex2_4tmp(albumaddx24xxx)=albumlisterex2_4(cnt)
 albumaddx24xxx++
 }
 loop
