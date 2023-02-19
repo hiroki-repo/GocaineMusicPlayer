@@ -6,6 +6,7 @@
 #include "encode.as"
 
 #define global ctype    utf16n2sjis(%1)        _ToSJIS@mod_encode(%1, CODEPAGE_UNICODE,  CODEPAGE_S_JIS)
+#define global ctype    utf16ben2sjis(%1)        _ToSJIS@mod_encode(%1, CODEPAGE_UNICODE_BE,  CODEPAGE_S_JIS)
 
 #module _GOCAINE_IDCHK_
 #define BE2LE32(%1) ((((%1>>(8*0))&0xFF)<<(8*3))|(((%1>>(8*1))&0xFF)<<(8*2))|(((%1>>(8*2))&0xFF)<<(8*1))|(((%1>>(8*3))&0xFF)<<(8*0)))
@@ -40,7 +41,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©nam"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -57,7 +60,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©ART"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 if result=""{
@@ -71,7 +76,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ALBUMARTIST"{cntx=cnt:memcpy da
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 }
@@ -87,7 +94,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©ART"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 }
@@ -104,7 +113,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ORGANIZATION"{cntx=cnt:memcpy d
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -120,7 +131,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©day"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -136,7 +149,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="YEAR"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 if result=""{
@@ -150,7 +165,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©day"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 if ((peek(result,0)&0xF0)=0x30) & ((peek(result,0)&0x0F)<=0x9){result=strmid(result,0,4)}else{result=strmid(result,1,4)}
@@ -169,7 +186,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="trkn"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -185,7 +204,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ISRC"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -202,7 +223,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©alb"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -218,7 +241,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ALBUMARTIST"{cntx=cnt:memcpy da
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 if result=""{
@@ -233,7 +258,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="©ART"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 }
@@ -248,7 +275,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ALBUMARTIST"{cntx=cnt:memcpy da
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 }
@@ -266,7 +295,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="dskn"{cntx=cnt:memcpy data,prm_
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -282,7 +313,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="COPYRIGHT"{cntx=cnt:memcpy data
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -298,7 +331,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="LICENSE"{cntx=cnt:memcpy data,p
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -314,7 +349,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="CONTACT"{cntx=cnt:memcpy data,p
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -330,7 +367,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="CONTACT"{cntx=cnt:memcpy data,p
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -346,7 +385,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="CONTACT"{cntx=cnt:memcpy data,p
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -362,7 +403,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="CONTACT"{cntx=cnt:memcpy data,p
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
@@ -378,7 +421,9 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="DESCRIPTION"{cntx=cnt:memcpy da
 if flac=1{result=utf8n2sjis@(data)}else{
 memcpy data4trans,data,4095,0,1
 result=data4trans
+if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
 if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result

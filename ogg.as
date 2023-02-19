@@ -40,6 +40,7 @@ if (metatype)=3{
 		repeat strlen(prm_1(cntx,0)):if peek(prm_1(cntx,0),cnt)>='a' and peek(prm_1(cntx,0),cnt)<='z'{poke prm_1(cntx,0),cnt,peek(prm_1(cntx,0),cnt)-32}:loop
 		memcpy prm_1(cntx,1),stringoftagss(1),strsizeofvar,0,0
 		cntx++
+		if prm_1(cntx-1,0)="METADATA_BLOCK_PICTURE"{break}
 	}
 	continue cnt+sizeoftaginfos+4+((cnt=0)*4)
 	loop

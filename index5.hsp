@@ -1,5 +1,6 @@
 #include "vAudio.as"
 #include "gettitle.as"
+title "Gocaine Music Player"
 *reload
 gosub *getmusiclisterx
 goto *albumlist
