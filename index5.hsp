@@ -63,33 +63,64 @@ loop
 return
 
 *getmusiclisterx
+cntplspls=0:cnt4dir=0:dim cnt4dir,2:cnt4dir2=0
+unknownedname(0)="Unknown File","Unknown Title","Unknown Artist","Unknown Publisher","-","-","-","-","Unknown Album","-","Unknown Artist"
 path=dirinfo($1000d)+"\\"
+pathlen=strlen(path)
+sdim mp3ils,256,32,256
+direclist=""
+dirlist direclist,path+"*.*",5
+//goto *getmusiclisterx4cx_3
+*getmusiclisterx4cx
+notesel direclist
+dirlist direclist,path+"*.*",5
+if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
+noteunsel
+repeat musixmax
+cnt2=cnt
+repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{if (cnt=1){mp3ils(cnt,cnt2)=getpath(mp3ils(0,cnt),9)}else{if (cnt=10){mp3ils(cnt,cnt2)=mp3ils(2,cnt2)}}}:if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
+loop
+return
+}
+noteunsel
+*getmusiclisterx4cx_2
+notesel direclist
+if strlen(path)>pathlen{prevpathpos=-1:pathpos=-1:repeat strlen(path):if strmid(path,cnt,1)="\\" or strmid(path,cnt,1)="/"{prevpathpos=pathpos:pathpos=cnt}:loop:if prevpathpos!-1{path=strmid(path,0,prevpathpos+1)}}
+if cnt4dir(cnt4dir2)>notemax{noteunsel:if cnt4dir2>0{cnt4dir(cnt4dir2)=0:cnt4dir2--}:goto *getmusiclisterx4cx}
+if notemax!0{
+noteget optpath,cnt4dir(cnt4dir2)
+if optpath!""{
+path+=optpath+"\\"
+}
+}
+cnt4dir(cnt4dir2)++
+cnt4dir2++
+noteunsel
+*getmusiclisterx4cx_3
 notesel filelist
 dirlist filelist,path+"*.*",1
-sdim mp3ils,256,32,256
-unknownedname(0)="Unknown File","Unknown Title","Unknown Artist","Unknown Publisher","-","-","-","-","Unknown Album","-","Unknown Artist"
 repeat notemax
 noteget filenamex,cnt
 sdim mp3info,4096,256,2
 //GetID3Array "C:\\Users\\hiroki_repo\\Music\\N01. äÂ–²‘z.mp3",mp3info
 GetTagArray path+filenamex,mp3info
-mp3ils(0,cnt)=path+filenamex
-mp3ils(1,cnt)=GetTitleName(mp3info)
-mp3ils(2,cnt)=GetArtistName(mp3info)
-mp3ils(3,cnt)=GetPublisherName(mp3info)
-mp3ils(4,cnt)=GetReleasedDate(mp3info)
-mp3ils(5,cnt)=GetReleasedYear(mp3info)
-mp3ils(6,cnt)=GetTrackNumber(mp3info)
-mp3ils(7,cnt)=GetISRC(mp3info)
-mp3ils(8,cnt)=GetAlbumName(mp3info)
-mp3ils(9,cnt)=GetDiscNumber(mp3info)
-mp3ils(10,cnt)=GetAlbumArtistName(mp3info)
-musixmax=cnt+1
+mp3ils(0,cnt+cntplspls)=path+filenamex
+mp3ils(1,cnt+cntplspls)=GetTitleName(mp3info)
+mp3ils(2,cnt+cntplspls)=GetArtistName(mp3info)
+mp3ils(3,cnt+cntplspls)=GetPublisherName(mp3info)
+mp3ils(4,cnt+cntplspls)=GetReleasedDate(mp3info)
+mp3ils(5,cnt+cntplspls)=GetReleasedYear(mp3info)
+mp3ils(6,cnt+cntplspls)=GetTrackNumber(mp3info)
+mp3ils(7,cnt+cntplspls)=GetISRC(mp3info)
+mp3ils(8,cnt+cntplspls)=GetAlbumName(mp3info)
+mp3ils(9,cnt+cntplspls)=GetDiscNumber(mp3info)
+mp3ils(10,cnt+cntplspls)=GetAlbumArtistName(mp3info)
+musixmax=(cnt+1)+(cntplspls)
 loop
-repeat musixmax
-cnt2=cnt
-repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{if (cnt=1){mp3ils(cnt,cnt2)=getpath(mp3ils(0,cnt),9)}else{if (cnt=10){mp3ils(cnt,cnt2)=mp3ils(2,cnt2)}}}:if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
-loop
+cntplspls+=((musixmax-1)-cntplspls)
+noteunsel
+cnt4dir2--
+goto *getmusiclisterx4cx_2
 return
 
 *albumlist
