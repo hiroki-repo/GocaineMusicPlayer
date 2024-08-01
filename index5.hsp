@@ -74,7 +74,9 @@ dirlist direclist,path+"*.*",5
 *getmusiclisterx4cx
 notesel direclist
 dirlist direclist,path+"*.*",5
+if stat!0{
 direclist+="\n"
+}
 if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
 noteunsel
 repeat musixmax
