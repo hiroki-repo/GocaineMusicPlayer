@@ -63,10 +63,40 @@ memcpy minetype,pictureofmp3,minetypesize,0,8
 descriptionsize=BE2LE32(lpeek(pictureofmp3,8+minetypesize))
 imagesize=BE2LE32(lpeek(pictureofmp3,8+minetypesize+4+descriptionsize+16))
 posofimage=8+minetypesize+4+descriptionsize+16+4
+magic=0
+magicmask=0xFF
+switch minetype
+case "image/vnd.microsoft.icon"
+magic=0x00010000
+magicmask=0xffffffff
+swbreak
+case "image/bmp"
+magic=0x00004d42
+magicmask=0xffff
+swbreak
+case "image/jpeg"
+magic=0x00ffd8ff
+magicmask=0xffffff
+swbreak
+case "image/png"
+magic=0x474e5089
+magicmask=0xffffffff
+swbreak
+case "image/gif"
+magic=0x38464947
+magicmask=0xffffffff
+swbreak
+swend
 sdim pictureofmp3x,imagesize
 memcpy pictureofmp3x,pictureofmp3,imagesize,0,posofimage
 memfile pictureofmp3x
 switch minetype
+case "image/vnd.microsoft.icon"
+picload "MEM:a.ico",prm_1_picloader
+swbreak
+case "image/bmp"
+picload "MEM:a.bmp",prm_1_picloader
+swbreak
 case "image/jpeg"
 picload "MEM:a.jpg",prm_1_picloader
 swbreak

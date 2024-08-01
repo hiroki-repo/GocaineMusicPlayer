@@ -168,28 +168,10 @@ ah = vAudioLoad(fname4play)
 if ah = 0 : goto *musiclistwithstopx
 gsel 0,0:pos 0,0
 color 0,0,0
-mes "Title     :"+mp3ils(1,albumlisterex2_3(selectedmusic))
-mes "Artist    :"+mp3ils(2,albumlisterex2_3(selectedmusic))
-mes "Publisher :"+mp3ils(3,albumlisterex2_3(selectedmusic))
-mes "Date      :"+mp3ils(4,albumlisterex2_3(selectedmusic))
-mes "Year      :"+mp3ils(5,albumlisterex2_3(selectedmusic))
-mes "Track ID  :"+mp3ils(6,albumlisterex2_3(selectedmusic))
-mes "ISRC      :"+mp3ils(7,albumlisterex2_3(selectedmusic))
-mes "Album     :"+mp3ils(8,albumlisterex2_3(selectedmusic))
-mes "Disc No   :"+mp3ils(9,albumlisterex2_3(selectedmusic))
-mes "Created by:"+mp3ils(10,albumlisterex2_3(selectedmusic))
+gosub *rendmusicinfo
 pos 1,1
 color 255,255,255
-mes "Title     :"+mp3ils(1,albumlisterex2_3(selectedmusic))
-mes "Artist    :"+mp3ils(2,albumlisterex2_3(selectedmusic))
-mes "Publisher :"+mp3ils(3,albumlisterex2_3(selectedmusic))
-mes "Date      :"+mp3ils(4,albumlisterex2_3(selectedmusic))
-mes "Year      :"+mp3ils(5,albumlisterex2_3(selectedmusic))
-mes "Track ID  :"+mp3ils(6,albumlisterex2_3(selectedmusic))
-mes "ISRC      :"+mp3ils(7,albumlisterex2_3(selectedmusic))
-mes "Album     :"+mp3ils(8,albumlisterex2_3(selectedmusic))
-mes "Disc No   :"+mp3ils(9,albumlisterex2_3(selectedmusic))
-mes "Created by:"+mp3ils(10,albumlisterex2_3(selectedmusic))
+gosub *rendmusicinfo
 color 0,0,0
 pos 0,0
 objsize ginfo(12),64
@@ -201,6 +183,18 @@ if (vAudioIsPlaying(ah)=0){goto *nextmusic}
 await
 loop
 stop
+*rendmusicinfo
+mes "Title     :"+mp3ils(1,albumlisterex2_3(selectedmusic))
+mes "Artist    :"+mp3ils(2,albumlisterex2_3(selectedmusic))
+mes "Publisher :"+mp3ils(3,albumlisterex2_3(selectedmusic))
+mes "Date      :"+mp3ils(4,albumlisterex2_3(selectedmusic))
+mes "Year      :"+mp3ils(5,albumlisterex2_3(selectedmusic))
+mes "Track ID  :"+mp3ils(6,albumlisterex2_3(selectedmusic))
+mes "ISRC      :"+mp3ils(7,albumlisterex2_3(selectedmusic))
+mes "Album     :"+mp3ils(8,albumlisterex2_3(selectedmusic))
+mes "Disc No   :"+mp3ils(9,albumlisterex2_3(selectedmusic))
+mes "Created by:"+mp3ils(10,albumlisterex2_3(selectedmusic))
+return
 *nextmusic
 selectedmusic++
 vAudioEnd

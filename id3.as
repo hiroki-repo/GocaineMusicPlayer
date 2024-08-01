@@ -145,10 +145,40 @@ memcpy minetype,pictureofmp3,64,0,1
 sdim pictureofmp3x,varsize(pictureofmp3)
 posofimage2=0:posofimage=0
 posofimage=strlen(minetype)+3
-repeat varsize(pictureofmp3):if peek(pictureofmp3,cnt+posofimage)=0{posofimage2=cnt:break}:loop
+magic=0
+magicmask=0xFF
+switch minetype
+case "image/vnd.microsoft.icon"
+magic=0x00010000
+magicmask=0xffffffff
+swbreak
+case "image/bmp"
+magic=0x00004d42
+magicmask=0xffff
+swbreak
+case "image/jpeg"
+magic=0x00ffd8ff
+magicmask=0xffffff
+swbreak
+case "image/png"
+magic=0x474e5089
+magicmask=0xffffffff
+swbreak
+case "image/gif"
+magic=0x38464947
+magicmask=0xffffffff
+swbreak
+swend
+repeat varsize(pictureofmp3):if (peek(pictureofmp3,cnt+posofimage)&0x80)!0 and (peek(pictureofmp3,cnt+posofimage+1)&0xC0)=0x80{continue cnt+((peek(pictureofmp3,cnt+posofimage)&0xC0)=0xC0)+((peek(pictureofmp3,cnt+posofimage)&0xE0)=0xE0)+((peek(pictureofmp3,cnt+posofimage)&0xF8)=0xF0)+1}:if peek(pictureofmp3,cnt+posofimage)=0{posofimage2=cnt:if (lpeek(pictureofmp3,(posofimage+posofimage2+1))&magicmask)=magic{break}}:loop
 memcpy pictureofmp3x,pictureofmp3,(varsize(pictureofmp3)-(posofimage+1+posofimage2)),0,posofimage+posofimage2+1
 memfile pictureofmp3x
 switch minetype
+case "image/vnd.microsoft.icon"
+picload "MEM:a.ico",prm_1_picloader
+swbreak
+case "image/bmp"
+picload "MEM:a.bmp",prm_1_picloader
+swbreak
 case "image/jpeg"
 picload "MEM:a.jpg",prm_1_picloader
 swbreak
