@@ -74,6 +74,7 @@ dirlist direclist,path+"*.*",5
 *getmusiclisterx4cx
 notesel direclist
 dirlist direclist,path+"*.*",5
+direclist+="\n"
 if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
 noteunsel
 repeat musixmax
@@ -156,6 +157,7 @@ exist fname4play:strsize2=strsize
 if strsize2=-1 : goto *musiclist
 buffer 1,640,480
 gsel 1,0
+PicAudioLoad fname4play,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
 imgsizexy=ginfo(26),ginfo(27)

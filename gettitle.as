@@ -32,6 +32,7 @@ return statue
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TIT2"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -51,6 +52,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TPE1"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -68,6 +70,7 @@ if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 if result=""{
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 cntx=-1
 result=""
 repeat length(prm_0):if prm_0(cnt,0)="TPE2"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -85,6 +88,7 @@ if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 if result=""{
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 cntx=-1
 result=""
 repeat length(prm_0):if prm_0(cnt,0)="TOPE"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -105,6 +109,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TPUB"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -123,6 +128,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TDRL"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -141,6 +147,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TYER"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -157,6 +164,7 @@ if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 if result=""{
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TDRL"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -177,6 +185,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TRCK"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -196,6 +205,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TSRC"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -214,6 +224,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TALB"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -233,6 +244,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 cntx=-1
 result=""
 repeat length(prm_0):if prm_0(cnt,0)="TPE2"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -249,6 +261,7 @@ if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 if result=""{
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 cntx=-1
 result=""
 repeat length(prm_0):if prm_0(cnt,0)="TPE1"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -267,6 +280,7 @@ if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 if result=""{
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 cntx=-1
 result=""
 repeat length(prm_0):if prm_0(cnt,0)="TOPE"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -286,6 +300,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TPOS"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -305,6 +320,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TCOP"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -323,6 +339,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="WCOP"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -341,6 +358,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="WOAF"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -359,6 +377,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="WOAR"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -377,6 +396,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="WOAS"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -395,6 +415,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="WPUB"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -413,6 +434,7 @@ return result
 flac=0
 sdim data,4096
 sdim data4trans,4096
+memset data,0,4096,0:memset data4trans,0,4096,0:sdim result,64
 result=""
 cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="COMM"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
@@ -427,5 +449,14 @@ if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4tra
 if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
 }
 return result
+#deffunc PicAudioLoad  str prm_0_str,int prm_1_int
+statue=-1
+PicID3Load prm_0_str,prm_1_int
+statue=stat
+if statue=-1{
+PicFLACLoad prm_0_str,prm_1_int
+statue=stat
+}
+return statue
 #global
 #endif
