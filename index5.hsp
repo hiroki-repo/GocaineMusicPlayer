@@ -88,7 +88,7 @@ return
 noteunsel
 *getmusiclisterx4cx_2
 notesel direclist
-if strlen(path)>pathlen{prevpathpos=-1:pathpos=-1:nojiscode=0:repeat strlen(path):if (cnt>=1){nojiscode=(((peek(path,cnt-1)>=0x81 and peek(path,cnt-1)<=0x9F) or (peek(path,cnt-1)>=0xE0 and peek(path,cnt-1)<=0xEF))=0)}:if (strmid(path,cnt,1)="\\" or strmid(path,cnt,1)="/") and nojiscode=1{prevpathpos=pathpos:pathpos=cnt}:loop:if prevpathpos!-1{path=strmid(path,0,prevpathpos+1)}}
+if strlen(path)>pathlen{prevpathpos=-1:pathpos=-1:nojiscode=0:repeat strlen(path):if (cnt>=1){nojiscode=(((peek(path,cnt-1)>=0x81 and peek(path,cnt-1)<=0x9F) or (peek(path,cnt-1)>=0xE0 and peek(path,cnt-1)<=0xFC))=0)}:if (strmid(path,cnt,1)="\\" or strmid(path,cnt,1)="/") and nojiscode=1{prevpathpos=pathpos:pathpos=cnt}:loop:if prevpathpos!-1{path=strmid(path,0,prevpathpos+1)}}
 if cnt4dir(cnt4dir2)>notemax{noteunsel:if cnt4dir2>0{cnt4dir(cnt4dir2)=0:cnt4dir2--}:goto *getmusiclisterx4cx}
 if notemax!0{
 noteget optpath,cnt4dir(cnt4dir2)
