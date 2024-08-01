@@ -75,7 +75,7 @@ dirlist direclist,path+"*.*",5
 notesel direclist
 dirlist direclist,path+"*.*",5
 if stat!0{
-direclist+="\n"
+//direclist+="\n"
 }
 if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
 noteunsel
@@ -120,7 +120,7 @@ mp3ils(9,cnt+cntplspls)=GetDiscNumber(mp3info)
 mp3ils(10,cnt+cntplspls)=GetAlbumArtistName(mp3info)
 musixmax=(cnt+1)+(cntplspls)
 loop
-cntplspls+=((musixmax-1)-cntplspls)
+cntplspls+=((musixmax-((optpath="" or optpath=".")!0))-cntplspls)
 noteunsel
 cnt4dir2--
 goto *getmusiclisterx4cx_2
