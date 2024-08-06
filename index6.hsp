@@ -1,7 +1,8 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.7"
+#pack "unknown.png"
+title "Gocaine Music Player 2.8"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -22,6 +23,9 @@ albumlister(albumaddx)=""+mp3ils(8,cnt)
 albumaddx++
 }
 loop
+albumlisterex+="All Songs"+"\n"
+albumlister(albumaddx)=""+"All Songs"
+albumaddx++
 return
 *getalbumpic
 albumaddx2=0
@@ -37,6 +41,31 @@ if (selectedalbumname=mp3ils(8,cnt)){albumfinename=""+mp3ils(0,cnt)}
 loop
 buffer 1,640,480
 gsel 1,0
+pathofmusic=getpath(albumfinename,32)
+exist pathofmusic+"cover.png"
+if strsize!-1{
+picload pathofmusic+"cover.png"
+}else{
+exist pathofmusic+"cover.jpg"
+if strsize!-1{
+picload pathofmusic+"cover.jpg"
+}else{
+exist pathofmusic+"cover.bmp"
+if strsize!-1{
+picload pathofmusic+"cover.bmp"
+}else{
+exist pathofmusic+"cover.ico"
+if strsize!-1{
+picload pathofmusic+"cover.ico"
+}else{
+exist "unknown.png"
+if strsize!-1{
+picload "unknown.png"
+}
+}
+}
+}
+}
 PicAudioLoad albumfinename,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
@@ -45,7 +74,7 @@ gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),1
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
-gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
+gzoom (ginfo(12)/3)*2,(ginfo(13)-140),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
 *getalbumpic2
 notesel albumlisterex2_2
@@ -53,6 +82,31 @@ noteget fname4play,selectedmusic
 noteunsel
 buffer 1,640,480
 gsel 1,0
+pathofmusic=getpath(fname4play,32)
+exist pathofmusic+"cover.png"
+if strsize!-1{
+picload pathofmusic+"cover.png"
+}else{
+exist pathofmusic+"cover.jpg"
+if strsize!-1{
+picload pathofmusic+"cover.jpg"
+}else{
+exist pathofmusic+"cover.bmp"
+if strsize!-1{
+picload pathofmusic+"cover.bmp"
+}else{
+exist pathofmusic+"cover.ico"
+if strsize!-1{
+picload pathofmusic+"cover.ico"
+}else{
+exist "unknown.png"
+if strsize!-1{
+picload "unknown.png"
+}
+}
+}
+}
+}
 PicAudioLoad fname4play,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
@@ -61,7 +115,7 @@ gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),1
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
-gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
+gzoom (ginfo(12)/3)*2,(ginfo(13)-140),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
 
 *getmusiclist
@@ -72,9 +126,15 @@ dim albumlisterex2_3,1
 dim albumlisterex2_4,1
 notesel albumlisterex
 noteget selectedalbumname,selectedalbum 
+if selectedalbumname="All Songs"{
+repeat musixmax
+albumlisterex2+=mp3ils(1,cnt)+"\n":albumlisterex2_2+=mp3ils(0,cnt)+"\n":albumlisterex2_3(albumaddx2)=cnt:albumlisterex2_4(albumaddx2)=int(mp3ils(6,cnt)):albumaddx2++
+loop
+}else{
 repeat musixmax
 if (selectedalbumname=mp3ils(8,cnt)){albumlisterex2+=mp3ils(1,cnt)+"\n":albumlisterex2_2+=mp3ils(0,cnt)+"\n":albumlisterex2_3(albumaddx2)=cnt:albumlisterex2_4(albumaddx2)=int(mp3ils(6,cnt)):albumaddx2++}
 loop
+}
 albumlisterex2tmp=""
 albumlisterex2_2tmp=""
 dim albumlisterex2_3tmp,1
@@ -174,8 +234,8 @@ return
 cls
 selectedalbumold=-1
 gosub *getalbumlisterx
-objsize ginfo(12),64//ginfo(13)-64
-pos 0,ginfo(13)-128
+objsize ginfo(12),76//ginfo(13)-64
+pos 0,ginfo(13)-140
 listbox selectedalbum,0,albumlisterex
 objsize ginfo(12)/2,64
 pos (ginfo(12)/2)*0,ginfo(13)-64
@@ -212,8 +272,8 @@ stop
 cls
 selectedmusicold=-1
 gosub *getmusiclist
-objsize ginfo(12),64//ginfo(13)-64
-pos 0,ginfo(13)-128
+objsize ginfo(12),76//ginfo(13)-64
+pos 0,ginfo(13)-140
 listbox selectedmusic,0,albumlisterex2
 objsize ginfo(12)/2,64
 pos (ginfo(12)/2)*0,ginfo(13)-64
@@ -261,6 +321,31 @@ exist fname4play:strsize2=strsize
 if strsize2=-1 : goto *musiclist
 buffer 1,640,480
 gsel 1,0
+pathofmusic=getpath(fname4play,32)
+exist pathofmusic+"cover.png"
+if strsize!-1{
+picload pathofmusic+"cover.png"
+}else{
+exist pathofmusic+"cover.jpg"
+if strsize!-1{
+picload pathofmusic+"cover.jpg"
+}else{
+exist pathofmusic+"cover.bmp"
+if strsize!-1{
+picload pathofmusic+"cover.bmp"
+}else{
+exist pathofmusic+"cover.ico"
+if strsize!-1{
+picload pathofmusic+"cover.ico"
+}else{
+exist "unknown.png"
+if strsize!-1{
+picload "unknown.png"
+}
+}
+}
+}
+}
 PicAudioLoad fname4play,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
