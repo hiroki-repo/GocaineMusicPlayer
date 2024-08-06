@@ -1,7 +1,7 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.2"
+title "Gocaine Music Player 2.3"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -184,10 +184,16 @@ pos (ginfo(12)/2)*1,ginfo(13)-64
 button goto ">",*musiclist
 *albumlisti
 	if selectedalbum!=selectedalbumold{
+	redraw 0
 	gosub *cleargrp
 	gosub *getalbumpic
 	gosub *getmusiclist
 	gsel 0,0:pos 0,0
+	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
+	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
+	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
+	pos 0,0
 	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
 	mes albumlisterex2
 	pos 1,1
@@ -195,6 +201,7 @@ button goto ">",*musiclist
 	mes albumlisterex2
 	color 0,0,0
 	pos 0,0
+	redraw 1
 	selectedalbumold=selectedalbum
 	}
 	await 1
@@ -214,10 +221,16 @@ pos (ginfo(12)/2)*1,ginfo(13)-64
 button goto ">",*musicplaymain
 *musiclisti
 	if selectedmusic!=selectedmusicold{
+	redraw 0
 	gosub *cleargrp
 	gosub *getalbumpic2
 	gosub *getmusiclist
 	gsel 0,0:pos 0,0
+	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
+	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
+	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
+	pos 0,0
 	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
 	gosub *rendmusicinfo
 	pos 1,1
@@ -225,6 +238,7 @@ button goto ">",*musicplaymain
 	gosub *rendmusicinfo
 	color 0,0,0
 	pos 0,0
+	redraw 1
 	selectedmusicold=selectedmusic
 	}
 	await 1
@@ -232,7 +246,7 @@ goto *musiclisti
 stop
 
 *cleargrp
-color 255,255,255
+color 128,128,128
 pos 0,0
 boxf
 return
