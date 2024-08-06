@@ -1,7 +1,7 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.6"
+title "Gocaine Music Player 2.7"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -195,10 +195,10 @@ button goto ">",*musiclist
 	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
 	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
-	color 255-monochrome,255-monochrome,255-monochrome
+	color 0,0,0
 	mes albumlisterex2
 	pos 1,1
-	color monochrome,monochrome,monochrome
+	color 255,255,255
 	mes albumlisterex2
 	color 0,0,0
 	pos 0,0
@@ -233,10 +233,10 @@ button goto ">",*musicplaymain
 	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
 	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
-	color 255-monochrome,255-monochrome,255-monochrome
+	color 0,0,0
 	gosub *rendmusicinfo
 	pos 1,1
-	color monochrome,monochrome,monochrome
+	color 255,255,255
 	gosub *rendmusicinfo
 	color 0,0,0
 	pos 0,0
@@ -280,10 +280,10 @@ boxf 0,0,ginfo(12),64
 boxf 0,(ginfo(13)-64),ginfo(12),ginfo(13)
 boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
 gsel 0,0:pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
-color 255-monochrome,255-monochrome,255-monochrome
+color 0,0,0
 gosub *rendmusicinfo
 pos 1,1
-color monochrome,monochrome,monochrome
+color 255,255,255
 gosub *rendmusicinfo
 color 0,0,0
 pos 0,0
