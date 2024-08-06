@@ -1,0 +1,263 @@
+#include "vAudio.as"
+#include "gettitle.as"
+#packopt name "GocaineMusicPlayer"
+title "Gocaine Music Player 2.0"
+albumfinename=""
+*reload
+gosub *getmusiclisterx
+goto *albumlist
+stop
+*getalbumlisterx
+albumaddx=0
+albumlisterex=""
+repeat musixmax
+cnt2=cnt
+albumlisterfound=-1
+repeat albumaddx:if albumlister(cnt)=mp3ils(8,cnt2){albumlisterfound=cnt:break}:loop
+if albumlisterfound=-1{
+albumlisterex+=mp3ils(8,cnt)+"\n"
+albumlister(albumaddx)=""+mp3ils(8,cnt)
+albumaddx++
+}
+loop
+return
+*getalbumpic
+albumaddx2=0
+albumlisterex2=""
+albumlisterex2_2=""
+albumfinename=""
+dim albumlisterex2_3,1
+dim albumlisterex2_4,1
+notesel albumlisterex
+noteget selectedalbumname,selectedalbum 
+repeat musixmax
+if (selectedalbumname=mp3ils(8,cnt)){albumfinename=""+mp3ils(0,cnt)}
+loop
+buffer 1,640,480
+gsel 1,0
+PicAudioLoad albumfinename,0
+/*sdim imgbuffer,strsize2
+picload "MEM:a.jpg"*/
+imgsizexy=ginfo(26),ginfo(27)
+gsel 0,0:pos (ginfo(12)/3)/2,0
+gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
+return
+*getalbumpic2
+notesel albumlisterex2_2
+noteget fname4play,selectedmusic
+noteunsel
+buffer 1,640,480
+gsel 1,0
+PicAudioLoad fname4play,0
+/*sdim imgbuffer,strsize2
+picload "MEM:a.jpg"*/
+imgsizexy=ginfo(26),ginfo(27)
+gsel 0,0:pos (ginfo(12)/3)/2,0
+gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
+return
+
+*getmusiclist
+albumaddx2=0
+albumlisterex2=""
+albumlisterex2_2=""
+dim albumlisterex2_3,1
+dim albumlisterex2_4,1
+notesel albumlisterex
+noteget selectedalbumname,selectedalbum 
+repeat musixmax
+if (selectedalbumname=mp3ils(8,cnt)){albumlisterex2+=mp3ils(1,cnt)+"\n":albumlisterex2_2+=mp3ils(0,cnt)+"\n":albumlisterex2_3(albumaddx2)=cnt:albumlisterex2_4(albumaddx2)=int(mp3ils(6,cnt)):albumaddx2++}
+loop
+albumlisterex2tmp=""
+albumlisterex2_2tmp=""
+dim albumlisterex2_3tmp,1
+dim albumlisterex2_4tmp,1
+albumaddx24xxx=0
+repeat
+cnt2=cnt
+repeat albumaddx2
+if albumlisterex2_4(cnt)=cnt2{
+notesel albumlisterex2
+noteget albumlisterex2slc,cnt
+noteunsel
+notesel albumlisterex2_2
+noteget albumlisterex2_2slc,cnt
+noteunsel
+albumlisterex2tmp+=albumlisterex2slc+"\n"
+albumlisterex2_2tmp+=albumlisterex2_2slc+"\n"
+albumlisterex2_3tmp(albumaddx24xxx)=albumlisterex2_3(cnt)
+albumlisterex2_4tmp(albumaddx24xxx)=albumlisterex2_4(cnt)
+albumaddx24xxx++
+}
+loop
+if albumaddx24xxx>=albumaddx2{break}
+loop
+albumlisterex2=albumlisterex2tmp
+albumlisterex2_2=albumlisterex2_2tmp
+repeat albumaddx2
+albumlisterex2_3(cnt)=albumlisterex2_3tmp(cnt)
+albumlisterex2_4(cnt)=albumlisterex2_4tmp(cnt)
+loop
+return
+
+*getmusiclisterx
+cntplspls=0:cnt4dir=0:dim cnt4dir,2:cnt4dir2=0
+unknownedname(0)="Unknown File","Unknown Title","Unknown Artist","Unknown Publisher","-","-","-","-","Unknown Album","-","Unknown Artist"
+path=dirinfo($1000d)+"\\"
+pathlen=strlen(path)
+sdim mp3ils,256,32,256
+direclist=""
+dirlist direclist,path+"*.*",5
+//goto *getmusiclisterx4cx_3
+*getmusiclisterx4cx
+notesel direclist
+dirlist direclist,path+"*.*",5
+if stat!0{
+//direclist+="\n"
+}
+if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
+noteunsel
+repeat musixmax
+cnt2=cnt
+repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{if (cnt=1){mp3ils(cnt,cnt2)=getpath(mp3ils(0,cnt),9)}else{if (cnt=10){mp3ils(cnt,cnt2)=mp3ils(2,cnt2)}}}:if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
+loop
+return
+}
+noteunsel
+*getmusiclisterx4cx_2
+notesel direclist
+if strlen(path)>pathlen{prevpathpos=-1:pathpos=-1:nojiscode=0:repeat strlen(path):if (cnt>=1){nojiscode=(((peek(path,cnt-1)>=0x81 and peek(path,cnt-1)<=0x9F) or (peek(path,cnt-1)>=0xE0 and peek(path,cnt-1)<=0xFC))=0)}:if (strmid(path,cnt,1)="\\" or strmid(path,cnt,1)="/") and nojiscode=1{prevpathpos=pathpos:pathpos=cnt}:loop:if prevpathpos!-1{path=strmid(path,0,prevpathpos+1)}}
+if cnt4dir(cnt4dir2)>notemax{noteunsel:if cnt4dir2>0{cnt4dir(cnt4dir2)=0:cnt4dir2--}:goto *getmusiclisterx4cx}
+if notemax!0{
+noteget optpath,cnt4dir(cnt4dir2)
+if optpath!""{
+path+=optpath+"\\"
+}
+}
+cnt4dir(cnt4dir2)++
+cnt4dir2++
+noteunsel
+*getmusiclisterx4cx_3
+notesel filelist
+dirlist filelist,path+"*.*",1
+repeat notemax
+noteget filenamex,cnt
+sdim mp3info,4096,256,2
+GetTagArray path+filenamex,mp3info
+mp3ils(0,cnt+cntplspls)=path+filenamex
+mp3ils(1,cnt+cntplspls)=GetTitleName(mp3info)
+mp3ils(2,cnt+cntplspls)=GetArtistName(mp3info)
+mp3ils(3,cnt+cntplspls)=GetPublisherName(mp3info)
+mp3ils(4,cnt+cntplspls)=GetReleasedDate(mp3info)
+mp3ils(5,cnt+cntplspls)=GetReleasedYear(mp3info)
+mp3ils(6,cnt+cntplspls)=GetTrackNumber(mp3info)
+mp3ils(7,cnt+cntplspls)=GetISRC(mp3info)
+mp3ils(8,cnt+cntplspls)=GetAlbumName(mp3info)
+mp3ils(9,cnt+cntplspls)=GetDiscNumber(mp3info)
+mp3ils(10,cnt+cntplspls)=GetAlbumArtistName(mp3info)
+musixmax=(cnt+1)+(cntplspls)
+loop
+cntplspls+=((musixmax-((optpath="" or optpath=".")!0))-cntplspls)
+noteunsel
+cnt4dir2--
+goto *getmusiclisterx4cx_2
+return
+
+*albumlist
+cls
+selectedalbumold=-1
+gosub *getalbumlisterx
+objsize ginfo(12),64//ginfo(13)-64
+pos 0,ginfo(13)-128
+listbox selectedalbum,0,albumlisterex
+objsize ginfo(12)/2,64
+pos (ginfo(12)/2)*0,ginfo(13)-64
+button goto "Reload",*reload
+pos (ginfo(12)/2)*1,ginfo(13)-64
+button goto ">",*musiclist
+*albumlisti
+	if selectedalbum!=selectedalbumold{
+	gosub *getalbumpic
+	selectedalbumold=selectedalbum
+	}
+	await 1
+goto *albumlisti
+stop
+*musiclist
+cls
+selectedmusicold=-1
+gosub *getmusiclist
+objsize ginfo(12),64//ginfo(13)-64
+pos 0,ginfo(13)-128
+listbox selectedmusic,0,albumlisterex2
+objsize ginfo(12)/2,64
+pos (ginfo(12)/2)*0,ginfo(13)-64
+button goto "<",*albumlist
+pos (ginfo(12)/2)*1,ginfo(13)-64
+button goto ">",*musicplaymain
+*musiclisti
+	if selectedmusic!=selectedmusicold{
+	gosub *getalbumpic2
+	selectedmusicold=selectedmusic
+	}
+	await 1
+goto *musiclisti
+stop
+
+*musicplaymain
+cls
+notesel albumlisterex2_2
+noteget fname4play,selectedmusic
+exist fname4play:strsize2=strsize
+if strsize2=-1 : goto *musiclist
+buffer 1,640,480
+gsel 1,0
+PicAudioLoad fname4play,0
+/*sdim imgbuffer,strsize2
+picload "MEM:a.jpg"*/
+imgsizexy=ginfo(26),ginfo(27)
+gsel 0,0:pos 0,0
+gzoom ginfo(12),ginfo(13)-64,1,0,0,imgsizexy(0),imgsizexy(1),1
+vAudioInit
+ah = vAudioLoad(fname4play)
+if ah = 0 : goto *musiclistwithstopx
+gsel 0,0:pos 0,0
+color 0,0,0
+gosub *rendmusicinfo
+pos 1,1
+color 255,255,255
+gosub *rendmusicinfo
+color 0,0,0
+pos 0,0
+objsize ginfo(12),64
+pos 0,ginfo(13)-64
+button goto "<",*musiclistwithstop
+vAudioPlay ah
+repeat
+if (vAudioIsPlaying(ah)=0){goto *nextmusic}
+await
+loop
+stop
+*rendmusicinfo
+mes "Title     :"+mp3ils(1,albumlisterex2_3(selectedmusic))
+mes "Artist    :"+mp3ils(2,albumlisterex2_3(selectedmusic))
+mes "Publisher :"+mp3ils(3,albumlisterex2_3(selectedmusic))
+mes "Date      :"+mp3ils(4,albumlisterex2_3(selectedmusic))
+mes "Year      :"+mp3ils(5,albumlisterex2_3(selectedmusic))
+mes "Track ID  :"+mp3ils(6,albumlisterex2_3(selectedmusic))
+mes "ISRC      :"+mp3ils(7,albumlisterex2_3(selectedmusic))
+mes "Album     :"+mp3ils(8,albumlisterex2_3(selectedmusic))
+mes "Disc No   :"+mp3ils(9,albumlisterex2_3(selectedmusic))
+mes "Created by:"+mp3ils(10,albumlisterex2_3(selectedmusic))
+return
+*nextmusic
+selectedmusic++
+vAudioEnd
+goto *musicplaymain
+*musiclistwithstop
+vAudioStop ah
+*musiclistwithstopx
+vAudioEnd
+goto *musiclist
+
+*exit
+end
