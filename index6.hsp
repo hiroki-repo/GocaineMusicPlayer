@@ -1,7 +1,7 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.4"
+title "Gocaine Music Player 2.5"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
