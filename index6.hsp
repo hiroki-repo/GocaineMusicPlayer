@@ -1,7 +1,7 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.0"
+title "Gocaine Music Player 2.2"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -41,6 +41,9 @@ PicAudioLoad albumfinename,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
 imgsizexy=ginfo(26),ginfo(27)
+gsel 2,0:pos 0,0
+gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),0
+pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
 gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
@@ -54,6 +57,9 @@ PicAudioLoad fname4play,0
 /*sdim imgbuffer,strsize2
 picload "MEM:a.jpg"*/
 imgsizexy=ginfo(26),ginfo(27)
+gsel 2,0:pos 0,0
+gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),0
+pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
 gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
@@ -178,7 +184,17 @@ pos (ginfo(12)/2)*1,ginfo(13)-64
 button goto ">",*musiclist
 *albumlisti
 	if selectedalbum!=selectedalbumold{
+	gosub *cleargrp
 	gosub *getalbumpic
+	gosub *getmusiclist
+	gsel 0,0:pos 0,0
+	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	mes albumlisterex2
+	pos 1,1
+	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
+	mes albumlisterex2
+	color 0,0,0
+	pos 0,0
 	selectedalbumold=selectedalbum
 	}
 	await 1
@@ -198,12 +214,28 @@ pos (ginfo(12)/2)*1,ginfo(13)-64
 button goto ">",*musicplaymain
 *musiclisti
 	if selectedmusic!=selectedmusicold{
+	gosub *cleargrp
 	gosub *getalbumpic2
+	gosub *getmusiclist
+	gsel 0,0:pos 0,0
+	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	gosub *rendmusicinfo
+	pos 1,1
+	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
+	gosub *rendmusicinfo
+	color 0,0,0
+	pos 0,0
 	selectedmusicold=selectedmusic
 	}
 	await 1
 goto *musiclisti
 stop
+
+*cleargrp
+color 255,255,255
+pos 0,0
+boxf
+return
 
 *musicplaymain
 cls
