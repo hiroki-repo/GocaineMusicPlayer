@@ -197,9 +197,9 @@ button goto ">",*musiclist
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 	color 255-monochrome,255-monochrome,255-monochrome
 	mes albumlisterex2
-	/*pos 1,1
-	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	mes albumlisterex2*/
+	pos 1,1
+	color monochrome,monochrome,monochrome
+	mes albumlisterex2
 	color 0,0,0
 	pos 0,0
 	redraw 1
@@ -235,9 +235,9 @@ button goto ">",*musicplaymain
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 	color 255-monochrome,255-monochrome,255-monochrome
 	gosub *rendmusicinfo
-	/*pos 1,1
-	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	gosub *rendmusicinfo*/
+	pos 1,1
+	color monochrome,monochrome,monochrome
+	gosub *rendmusicinfo
 	color 0,0,0
 	pos 0,0
 	redraw 1
@@ -282,9 +282,9 @@ boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
 gsel 0,0:pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 color 255-monochrome,255-monochrome,255-monochrome
 gosub *rendmusicinfo
-/*pos 1,1
-color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-gosub *rendmusicinfo*/
+pos 1,1
+color monochrome,monochrome,monochrome
+gosub *rendmusicinfo
 color 0,0,0
 pos 0,0
 objsize ginfo(12),64
