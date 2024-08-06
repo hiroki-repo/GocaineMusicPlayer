@@ -1,7 +1,7 @@
 #include "vAudio.as"
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
-title "Gocaine Music Player 2.3"
+title "Gocaine Music Player 2.4"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -189,16 +189,17 @@ button goto ">",*musiclist
 	gosub *getalbumpic
 	gosub *getmusiclist
 	gsel 0,0:pos 0,0
-	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	//color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
 	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
 	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
 	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
-	pos 0,0
-	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
+	color 255-monochrome,255-monochrome,255-monochrome
 	mes albumlisterex2
-	pos 1,1
+	/*pos 1,1
 	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	mes albumlisterex2
+	mes albumlisterex2*/
 	color 0,0,0
 	pos 0,0
 	redraw 1
@@ -226,16 +227,17 @@ button goto ">",*musicplaymain
 	gosub *getalbumpic2
 	gosub *getmusiclist
 	gsel 0,0:pos 0,0
-	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	//color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
 	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
 	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
 	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
-	pos 0,0
-	color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
+	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
+	color 255-monochrome,255-monochrome,255-monochrome
 	gosub *rendmusicinfo
-	pos 1,1
+	/*pos 1,1
 	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	gosub *rendmusicinfo
+	gosub *rendmusicinfo*/
 	color 0,0,0
 	pos 0,0
 	redraw 1
@@ -266,17 +268,23 @@ imgsizexy=ginfo(26),ginfo(27)
 gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),0
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
-gsel 0,0:pos 0,0
-gzoom ginfo(12),ginfo(13)-64,1,0,0,imgsizexy(0),imgsizexy(1),1
+gsel 0,0:pos (ginfo(12)/3)/2,64
+gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
 vAudioInit
 ah = vAudioLoad(fname4play)
 if ah = 0 : goto *musiclistwithstopx
 gsel 0,0:pos 0,0
-color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
-gosub *rendmusicinfo
-pos 1,1
 color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
+boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
+boxf 0,0,ginfo(12),64
+boxf 0,(ginfo(13)-64),ginfo(12),ginfo(13)
+boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
+gsel 0,0:pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
+color 255-monochrome,255-monochrome,255-monochrome
 gosub *rendmusicinfo
+/*pos 1,1
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
+gosub *rendmusicinfo*/
 color 0,0,0
 pos 0,0
 objsize ginfo(12),64
