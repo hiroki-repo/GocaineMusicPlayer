@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 2.8"
+title "Gocaine Music Player 2.9"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -186,7 +186,7 @@ if cnt4dir(0)>=notemax & cnt4dir2=0 & musixmax!0{
 noteunsel
 repeat musixmax
 cnt2=cnt
-repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{if (cnt=1){mp3ils(cnt,cnt2)=getpath(mp3ils(0,cnt),9)}else{if (cnt=10){mp3ils(cnt,cnt2)=mp3ils(2,cnt2)}}}:if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
+repeat length(unknownedname):if mp3ils(cnt,cnt2)=""{if (cnt=1){mp3ils(cnt,cnt2)=getpath(mp3ils(0,cnt2),9)}else{if (cnt=10){mp3ils(cnt,cnt2)=mp3ils(2,cnt2)}}}:if mp3ils(cnt,cnt2)=""{mp3ils(cnt,cnt2)=unknownedname(cnt)}:loop
 loop
 return
 }
