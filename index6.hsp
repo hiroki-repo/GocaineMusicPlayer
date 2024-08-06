@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 2.9"
+title "Gocaine Music Player 2.95"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -26,6 +26,7 @@ loop
 albumlisterex+="All Songs"+"\n"
 albumlister(albumaddx)=""+"All Songs"
 albumaddx++
+if albumaddx<selectedalbum{selectedalbum=0}
 return
 *getalbumpic
 albumaddx2=0
@@ -165,6 +166,7 @@ repeat albumaddx2
 albumlisterex2_3(cnt)=albumlisterex2_3tmp(cnt)
 albumlisterex2_4(cnt)=albumlisterex2_4tmp(cnt)
 loop
+if albumaddx2<(selectedmusic+1){selectedmusic=0}
 return
 
 *getmusiclisterx
@@ -232,6 +234,7 @@ return
 
 *albumlist
 cls
+selectedmusic=0
 selectedalbumold=-1
 gosub *getalbumlisterx
 objsize ginfo(12),76//ginfo(13)-64
