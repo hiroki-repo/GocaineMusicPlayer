@@ -508,7 +508,7 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="LYRICS"{cntx=cnt:memcpy data,pr
 if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="UNSYNCEDLYRICS"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop:flac=1}
 if flac=1{result=utf8n2sjis@(data)}else{
 if peek(data,0)<32{
-memcpy data4trans,data,4095,0,1+9
+memcpy data4trans,data,4095-9,0,1+9
 //memcpy data4trans,data,4095,0,1
 result=data4trans
 if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
