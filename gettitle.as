@@ -508,13 +508,12 @@ if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="LYRICS"{cntx=cnt:memcpy data,pr
 if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="UNSYNCEDLYRICS"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop:flac=1}
 if flac=1{result=utf8n2sjis@(data)}else{
 if peek(data,0)<32{
-memcpy data4trans,data,4095-9,0,1+9
-//memcpy data4trans,data,4095,0,1
+memcpy data4trans,data,4095-3,0,1+3
 result=data4trans
-if peek(data,0)==0{result=eucjp2sjis@(data4trans)}
-if peek(data,0)==1{memcpy data4trans,data,4093,0,3:result=utf16n2sjis(data4trans)}
-if peek(data,0)==2{memcpy data4trans,data,4093,0,3:result=utf16ben2sjis(data4trans)}
-if peek(data,0)==3{result=utf8n2sjis@(data4trans)}
+if peek(data,0)==0{result=eucjp2sjis@(data4trans):if result=""{memcpy data4trans,data,4095-(3+1),0,1+3+1:result=eucjp2sjis@(data4trans)}}
+if peek(data,0)==1{memcpy data4trans,data,4093,0,2:result=utf16n2sjis(data4trans):if result=""{memcpy data4trans,data,4095-(3+4+2),0,1+3+4+2:result=utf16n2sjis(data4trans)}}
+if peek(data,0)==2{memcpy data4trans,data,4093,0,2:result=utf16ben2sjis(data4trans):if result=""{memcpy data4trans,data,4095-(3+4+2),0,1+3+4+2:result=utf16ben2sjis(data4trans)}}
+if peek(data,0)==3{result=utf8n2sjis@(data4trans):if result=""{memcpy data4trans,data,4095-(3+1),0,1+3+1:result=utf8n2sjis@(data4trans)}}
 }
 }
 if strmid(result,0,1)!="["{result="[00:00:00] "+result}
