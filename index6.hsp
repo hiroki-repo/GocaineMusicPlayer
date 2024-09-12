@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 2.95"
+title "Gocaine Music Player 2.96"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -75,6 +75,7 @@ gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),1
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf
 gzoom (ginfo(12)/3)*2,(ginfo(13)-140),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
 *getalbumpic2
@@ -116,6 +117,7 @@ gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),1
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,0
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf
 gzoom (ginfo(12)/3)*2,(ginfo(13)-140),1,0,0,imgsizexy(0),imgsizexy(1),1
 return
 
@@ -224,6 +226,7 @@ mp3ils(7,cnt+cntplspls)=GetISRC(mp3info)
 mp3ils(8,cnt+cntplspls)=GetAlbumName(mp3info)
 mp3ils(9,cnt+cntplspls)=GetDiscNumber(mp3info)
 mp3ils(10,cnt+cntplspls)=GetAlbumArtistName(mp3info)
+mp3ils(11,cnt+cntplspls)=GetAudioLyrics(mp3info)
 musixmax=(cnt+1)+(cntplspls)
 loop
 cntplspls+=((musixmax-((optpath="" or optpath=".")!0))-cntplspls)
@@ -251,12 +254,7 @@ button goto ">",*musiclist
 	gosub *cleargrp
 	gosub *getalbumpic
 	gosub *getmusiclist
-	gsel 0,0:pos 0,0
-	//color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
-	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
-	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
-	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
+	gsel 0,0
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 	color 0,0,0
 	mes albumlisterex2
@@ -289,12 +287,7 @@ button goto ">",*musicplaymain
 	gosub *cleargrp
 	gosub *getalbumpic2
 	gosub *getmusiclist
-	gsel 0,0:pos 0,0
-	//color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2)
-	color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-	boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
-	boxf 0,(ginfo(13)-128),ginfo(12),ginfo(13)
-	boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
+	gsel 0,0
 	pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 	color 0,0,0
 	gosub *rendmusicinfo
@@ -357,16 +350,11 @@ gsel 2,0:pos 0,0
 gzoom 1,1,1,0,0,imgsizexy(0),imgsizexy(1),1
 pget 0,0:rgboffontcolor=ginfo_r,ginfo_g,ginfo_b
 gsel 0,0:pos (ginfo(12)/3)/2,64
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf
 gzoom (ginfo(12)/3)*2,(ginfo(13)-128),1,0,0,imgsizexy(0),imgsizexy(1),1
 vAudioInit
 ah = vAudioLoad(fname4play)
 if ah = 0 : goto *musiclistwithstopx
-gsel 0,0:pos 0,0
-color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2)
-boxf 0,0,(ginfo(12)/3)/2,ginfo(13)
-boxf 0,0,ginfo(12),64
-boxf 0,(ginfo(13)-64),ginfo(12),ginfo(13)
-boxf (ginfo(12)-2-(ginfo(12)/3)/2),0,ginfo(12),ginfo(13)
 gsel 0,0:pos 0,0:monochrome=(rgboffontcolor(0)+rgboffontcolor(1)+rgboffontcolor(2))/3
 color 0,0,0
 gosub *rendmusicinfo
@@ -379,8 +367,28 @@ objsize ginfo(12),64
 pos 0,ginfo(13)-64
 button goto "<",*musiclistwithstop
 vAudioPlay ah
+lflf="":poke lflf,0,0xa
+split mp3ils(11,albumlisterex2_3(selectedmusic)),lflf,lyrics4now:lyrics4nowsz=stat:lyricstmp=""
+ms4audiocurx=0
 repeat
 if (vAudioIsPlaying(ah)=0){goto *nextmusic}
+redraw 0
+gsel 0,0
+vAudioGetCurrentTime ah,ms4audiocurx
+ms4audiocurxms=(ms4audiocurx\1000)/10
+ms4audiocurxs=((ms4audiocurx/1000)\60)
+ms4audiocurxm=((ms4audiocurx/1000/60)\60)
+tmpxs="["+strf("%02d",ms4audiocurxm)+":"+strf("%02d",ms4audiocurxs)+":"+strf("%02d",ms4audiocurxms)+"] "
+repeat lyrics4nowsz:if strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs),strlen(lyrics4now(cnt))):break}:loop
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf 320,0,ginfo(12),63
+pos 320,0
+color 0,0,0
+mes lyricstmp
+pos 321,1
+color 255,255,255
+mes lyricstmp
+redraw 1
+
 await
 loop
 stop
