@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 2.96"
+title "Gocaine Music Player 2.97"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -379,12 +379,14 @@ ms4audiocurxms=(ms4audiocurx\1000)/10
 ms4audiocurxs=((ms4audiocurx/1000)\60)
 ms4audiocurxm=((ms4audiocurx/1000/60)\60)
 tmpxs="["+strf("%02d",ms4audiocurxm)+":"+strf("%02d",ms4audiocurxs)+":"+strf("%02d",ms4audiocurxms)+"] "
-repeat lyrics4nowsz:if strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs),strlen(lyrics4now(cnt))):break}:loop
-color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf 320,0,ginfo(12),63
-pos 320,0
+tmpxs2="["+strf("%02d",ms4audiocurxm)+":"+strf("%02d",ms4audiocurxs)+"."+strf("%02d",ms4audiocurxms)+"] "
+tmpxs3="["+strf("%02d",ms4audiocurxm)+"."+strf("%02d",ms4audiocurxs)+"."+strf("%02d",ms4audiocurxms)+"] "
+repeat lyrics4nowsz:if strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs | strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs2 | strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs3{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs),strlen(lyrics4now(cnt))):break}:loop
+color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf 320,20,ginfo(12),63
+pos 320,20
 color 0,0,0
 mes lyricstmp
-pos 321,1
+pos 321,21
 color 255,255,255
 mes lyricstmp
 redraw 1
