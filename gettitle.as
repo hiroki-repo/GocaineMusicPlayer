@@ -123,6 +123,8 @@ cntx=-1
 repeat length(prm_0):if prm_0(cnt,0)="TPUB"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop
 if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="TPB"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop}
 if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="ORGANIZATION"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop:flac=1}
+if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="Label"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop:flac=1}
+if cntx=-1{repeat length(prm_0):if prm_0(cnt,0)="LABEL"{cntx=cnt:memcpy data,prm_0(cnt,1),varsize(prm_0(cnt,1)),0,0:break}:loop:flac=1}
 if flac=1{result=utf8n2sjis@(data)}else{
 if peek(data,0)<32{
 memcpy data4trans,data,4095,0,1

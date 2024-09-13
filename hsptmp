@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 3.06"
+title "Gocaine Music Player 3.07"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
