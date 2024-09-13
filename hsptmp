@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 3.03"
+title "Gocaine Music Player 3.04"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -370,6 +370,8 @@ vAudioPlay ah
 lflf="":poke lflf,0,0xa
 split mp3ils(11,albumlisterex2_3(selectedmusic)),lflf,lyrics4now:lyrics4nowsz=stat:lyricstmp=""
 ms4audiocurx=0
+windowlength=ginfo(12)
+vAudioGetTotalTime ah,songlengthmilli
 repeat
 if (vAudioIsPlaying(ah)=0){goto *nextmusic}
 redraw 0
@@ -389,7 +391,9 @@ if strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs | strmid(lyrics4now(cnt),0,strl
 if strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_ | strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_2 | strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_3{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs_),strlen(lyrics4now(cnt))):break}
 }
 loop
+windowlengthtmp=ginfo(12):if windowlengthtmp!=0{windowlength=windowlengthtmp}
 color rgboffontcolor(0),rgboffontcolor(1),rgboffontcolor(2):boxf 0,(64-20)+(ginfo(13)-128),ginfo(12),(64-20)+(ginfo(13)-128)+20
+color 255-rgboffontcolor(0),255-rgboffontcolor(1),255-rgboffontcolor(2):boxf 0,(64-20)+(ginfo(13)-128),int(double(ms4audiocurx)*double(double(windowlength)/songlengthmilli)),(64-20)+(ginfo(13)-128)+20
 pos 0,(64-20)+(ginfo(13)-128):mes " ",1:fontsize=ginfo(22)
 pos ((ginfo(12)/2)-((strlen(lyricstmp)/2)*fontsize))+0,((64-20)+(ginfo(13)-128))+0
 color 0,0,0
