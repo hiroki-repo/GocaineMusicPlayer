@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 3.05"
+title "Gocaine Music Player 3.06"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -270,7 +270,7 @@ button goto ">",*musiclist
 goto *albumlisti
 stop
 *musiclist
-cls
+cls:onclick 0
 selectedmusicold=-1
 gosub *getmusiclist
 objsize ginfo(12),76//ginfo(13)-64
@@ -370,7 +370,7 @@ vAudioPlay ah
 lflf="":poke lflf,0,0xa
 split mp3ils(11,albumlisterex2_3(selectedmusic)),lflf,lyrics4now:lyrics4nowsz=stat:lyricstmp=""
 ms4audiocurx=0
-windowlength=ginfo(12)
+windowlength=ginfo(12):onclick 1:onclick gosub *panningmusic
 vAudioGetTotalTime ah,songlengthmilli
 repeat
 if (vAudioIsPlaying(ah)=0){goto *nextmusic}
@@ -389,8 +389,7 @@ tmpxs_3="["+strf("%02d",ms4audiocurxm)+"."+strf("%02d",ms4audiocurxs)+"."+strf("
 repeat lyrics4nowsz
 if strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs | strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs2 | strmid(lyrics4now(cnt),0,strlen(tmpxs))=tmpxs3{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs),strlen(lyrics4now(cnt))):break}else{
 if strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_ | strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_2 | strmid(lyrics4now(cnt),0,strlen(tmpxs_))=tmpxs_3{lyricstmp=strmid(lyrics4now(cnt),strlen(tmpxs_),strlen(lyrics4now(cnt))):break}else{
-if lyrics4nowsz>1 & cnt>=1{if strmid(lyrics4now(1),0,1)!="["{if cnt=(ms4audiocurx/(songlengthmilli/lyrics4nowsz)){lyricstmp=lyrics4now(cnt):break}}
-}
+if strmid(lyrics4now(0),0,1)!="["{if cnt=(ms4audiocurx/(songlengthmilli/lyrics4nowsz)){lyricstmp=lyrics4now(cnt):break}}
 }
 }
 loop
@@ -409,6 +408,12 @@ redraw 1
 await
 loop
 stop
+*panningmusic
+mousexy=mousex,mousey
+if mousexy(1)>=((64-20)+(ginfo(13)-128)) & mousexy(1)<=((64-20)+(ginfo(13)-128)+20){
+vAudioSeek ah,mousexy(0)*(songlengthmilli/windowlength)
+}
+return
 *rendmusicinfo
 mes "Title     :"+mp3ils(1,albumlisterex2_3(selectedmusic))
 mes "Artist    :"+mp3ils(2,albumlisterex2_3(selectedmusic))
@@ -422,6 +427,7 @@ mes "Disc No   :"+mp3ils(9,albumlisterex2_3(selectedmusic))
 mes "Created by:"+mp3ils(10,albumlisterex2_3(selectedmusic))
 return
 *nextmusic
+onclick 0
 selectedmusic++
 vAudioEnd
 goto *musicplaymain

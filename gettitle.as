@@ -516,7 +516,6 @@ if peek(data,0)==2{memcpy data4trans,data4trans,4093,0,2:result=utf16ben2sjis(da
 if peek(data,0)==3{result=utf8n2sjis@(data4trans):if result=""{memcpy data4trans,data,4095-(3+1),0,1+3+1:result=utf8n2sjis@(data4trans)}}
 }
 }
-if strmid(result,0,1)!="["{result="[00:00:00] "+result}
 return result
 #deffunc PicAudioLoad  str prm_0_str,int prm_1_int
 statue=-1
