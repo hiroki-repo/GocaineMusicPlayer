@@ -2,7 +2,7 @@
 #include "gettitle.as"
 #packopt name "GocaineMusicPlayer"
 #pack "unknown.png"
-title "Gocaine Music Player 3.07"
+title "Gocaine Music Player 3.08"
 albumfinename=""
 buffer 2,1,1
 gsel 0,0
@@ -215,6 +215,8 @@ repeat notemax
 noteget filenamex,cnt
 sdim mp3info,4096,256,2
 GetTagArray path+filenamex,mp3info
+formatofthemf=getpath("A.BC",2+16)
+if stat!-1 | (formatofthemf=".mp3" | formatofthemf=".m4a" | formatofthemf=".aac" | formatofthemf=".wav" | formatofthemf=".ogg" | formatofthemf=".oga" | formatofthemf=".flac" | formatofthemf=".fla" | formatofthemf=".alac" | formatofthemf=".ala" | formatofthemf=".mp4"){
 mp3ils(0,cnt+cntplspls)=path+filenamex
 mp3ils(1,cnt+cntplspls)=GetTitleName(mp3info)
 mp3ils(2,cnt+cntplspls)=GetArtistName(mp3info)
@@ -228,6 +230,7 @@ mp3ils(9,cnt+cntplspls)=GetDiscNumber(mp3info)
 mp3ils(10,cnt+cntplspls)=GetAlbumArtistName(mp3info)
 mp3ils(11,cnt+cntplspls)=GetAudioLyrics(mp3info)
 musixmax=(cnt+1)+(cntplspls)
+}
 loop
 cntplspls+=((musixmax-((optpath="" or optpath=".")!0))-cntplspls)
 noteunsel
